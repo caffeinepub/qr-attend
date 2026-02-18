@@ -1,0 +1,96 @@
+{
+  "kind": "build_request",
+  "title": "Add splash screen and first-run registration with Student/Teacher roles",
+  "projectName": "QR Attend",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Add an app launch splash screen that is shown before the authentication/onboarding flow, and then automatically routes the user to the correct next screen (registration if first-time, otherwise login/dashboard).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "first will be the splash screen annd then when user is first time visiting the app it has to appear registration screen"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On a cold start, users see a dedicated splash screen UI before other pages render.",
+        "After a short, non-blocking delay (or once initial auth/profile state is known), the app navigates away from the splash screen automatically.",
+        "The splash screen does not create an infinite loop when navigating back/forward or refreshing the page."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Replace the current first-time profile setup dialog with a first-run Registration screen that collects (1) the user’s name and (2) a role selection (Student or Teacher), and persists both to the user account.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "when user is first time visiting the app it has to appear registration screen where registatration is done and in this thier will be role selection button if user chooses teacher role it will be saved"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When an authenticated user has no saved profile/registration yet, they are routed to the Registration screen (not a modal dialog).",
+        "Registration requires a non-empty name and an explicit role selection: Student or Teacher.",
+        "Submitting registration persists the data so that refreshing the app no longer shows the Registration screen for that user.",
+        "Backend exposes APIs needed by the frontend to save and fetch the caller’s registration (name + role)."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement role-based navigation and dashboards so that after login, users are routed to the correct dashboard experience based on the saved role (Teacher vs Student).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "when user login with that same credentials it has to open respective dashboard"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After successful login, the app checks the caller’s saved role and routes the user to the correct dashboard experience.",
+        "Teacher role users can access the existing session management and attendance overview areas (currently under admin routes) without seeing access denied.",
+        "Student role users cannot access teacher-only pages and are redirected to an access denied screen (or back to their dashboard).",
+        "Bottom navigation and dashboard cards only show links relevant to the current role (Student vs Teacher)."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Update role naming throughout the UI from Admin/User wording to Teacher/Student wording while keeping all user-facing text in English and ensuring the app remains consistent across login, registration, dashboard, and navigation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "recent-messages"
+        ],
+        "quotes": [
+          "its only for student... role selection ... teacher role"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All user-facing role labels shown in the app use “Student” and “Teacher” (English), including navigation labels and dashboard content.",
+        "Teacher-only areas are labeled in a teacher-appropriate way (e.g., sessions/overview), without referencing “Admin” in the UI.",
+        "No broken routes or missing labels occur due to renaming."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo; do not introduce additional backend services.",
+    "Do not edit files under frontend/src/components/ui or any paths listed in frontend.immutablePaths (compose existing components instead).",
+    "The platform cannot output a directly downloadable APK file; the deliverable remains a Web/PWA build, with APK generation done externally via TWA as documented in frontend/DELIVERY.md and the in-app Delivery Notes page."
+  ],
+  "nonGoals": [
+    "Implementing username/password authentication (authentication remains Internet Identity-based).",
+    "Producing or attaching a pre-built downloadable APK artifact from this build system.",
+    "Adding third-party auth providers or external databases."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

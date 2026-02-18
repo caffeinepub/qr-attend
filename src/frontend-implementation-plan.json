@@ -1,0 +1,133 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "QR Attend - Splash + First-run Registration (Student/Teacher) + Role-based UX",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Show a dedicated splash screen on cold start and auto-navigate to registration/login/dashboard based on initial auth/profile/role state.",
+      "acceptanceCriteria": [
+        "On a cold start, users see a dedicated splash screen UI before other pages render.",
+        "After a short, non-blocking delay (or once initial auth/profile state is known), the app navigates away from the splash screen automatically.",
+        "The splash screen does not create an infinite loop when navigating back/forward or refreshing the page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/SplashPage.tsx",
+          "operation": "create",
+          "description": "Create a Splash screen page UI for QR Attend and include branding/illustration using frontend/public/assets/generated/splash-illustration.dim_1080x1920.png. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire splash into the app boot flow: render SplashPage first (before other pages) while Internet Identity and initial profile/role queries resolve, then automatically navigate to the correct next route (registration, login, or dashboard). Implement a one-time-per-tab guard (e.g., sessionStorage) to prevent back/forward/refresh loops. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LoginPage.tsx",
+          "operation": "modify",
+          "description": "Adjust post-login navigation so successful login hands off to the splash/boot decision flow (instead of immediately routing to the dashboard). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Replace the first-time profile setup modal with a first-run Registration screen that collects name and role (Student/Teacher) and persists them.",
+      "acceptanceCriteria": [
+        "When an authenticated user has no saved profile/registration yet, they are routed to the Registration screen (not a modal dialog).",
+        "Registration requires a non-empty name and an explicit role selection: Student or Teacher.",
+        "Submitting registration persists the data so that refreshing the app no longer shows the Registration screen for that user.",
+        "Backend exposes APIs needed by the frontend to save and fetch the caller’s registration (name + role)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RegistrationPage.tsx",
+          "operation": "create",
+          "description": "Create a dedicated Registration screen (non-modal) that collects required name + explicit role selection (Student/Teacher), validates inputs, and submits via existing profile/role hooks. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Remove the ProfileSetupDialog-first-run modal behavior and add a protected /register route. Update the boot routing logic so authenticated users with no saved profile are routed to /register. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "delete",
+          "description": "Remove the legacy first-time profile setup dialog (replaced by the Registration screen). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUser.ts",
+          "operation": "modify",
+          "description": "Extend current-user hooks to support registration needs: add a mutation to persist the caller’s role using existing backend role APIs, coordinate invalidation of role/admin queries, and keep the existing get/save profile flow. Map Teacher/Student UI roles to backend roles (admin/user) while keeping UI labels Teacher/Student. Use the authorization component’s frontend guidance for profile setup and for clearing cached queries on logout; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Implement role-based routing/guards and role-specific dashboard/navigation so Teacher and Student see the correct experience and permissions.",
+      "acceptanceCriteria": [
+        "After successful login, the app checks the caller’s saved role and routes the user to the correct dashboard experience.",
+        "Teacher role users can access the existing session management and attendance overview areas (currently under admin routes) without seeing access denied.",
+        "Student role users cannot access teacher-only pages and are redirected to an access denied screen (or back to their dashboard).",
+        "Bottom navigation and dashboard cards only show links relevant to the current role (Student vs Teacher)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update the boot routing logic to fetch and use the saved role (via existing role/admin hooks) to decide the post-login landing experience. Ensure Teacher maps to the existing admin-only areas so teachers do not get access denied, and ensure Students remain blocked by teacher-only guards. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AdminRoute.tsx",
+          "operation": "modify",
+          "description": "Keep the existing admin-guard behavior but align copy/behavior with Teacher-only access (no 'Admin' wording in UI). Optionally redirect students back to the student dashboard in addition to /access-denied (consistent with requirement). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Update bottom navigation to show only links relevant to the current role (Teacher vs Student) and rename labels appropriately (e.g., dashboard, sessions, overview). Use the authorization component’s role-based UI guidance; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Make the dashboard experience role-aware: show teacher-only cards (sessions/overview) only for Teacher; show student-appropriate content for Student; ensure labels reflect Teacher/Student naming. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AccessDeniedPage.tsx",
+          "operation": "modify",
+          "description": "Update the access denied messaging and return action to reflect Teacher-only restrictions and guide Students back to their dashboard without referencing Admin. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Rename all UI role wording from Admin/User to Teacher/Student across login, registration, dashboard, and navigation (English only).",
+      "acceptanceCriteria": [
+        "All user-facing role labels shown in the app use “Student” and “Teacher” (English), including navigation labels and dashboard content.",
+        "Teacher-only areas are labeled in a teacher-appropriate way (e.g., sessions/overview), without referencing “Admin” in the UI.",
+        "No broken routes or missing labels occur due to renaming."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RegistrationPage.tsx",
+          "operation": "modify",
+          "description": "Ensure the Registration UI uses Student/Teacher wording everywhere, including validation and submission messaging. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Replace any Admin/User labels with Teacher/Student labels while keeping routes stable and links role-appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Update dashboard headings, card titles/descriptions, and any role references to use Teacher/Student terminology consistently (English). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AccessDeniedPage.tsx",
+          "operation": "modify",
+          "description": "Remove 'administrator/admin' wording and replace with Teacher/Student-appropriate copy, ensuring navigation remains intact. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

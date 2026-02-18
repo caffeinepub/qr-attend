@@ -1,0 +1,101 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-an-app-launch-splash-screen-that-is-shown-before-the-authentication-onboarding-flow-and-then-automatically-routes-the-user-to-the-correct-next-screen-registration-if-first-time-otherwise-login-dashboard",
+      "featureTitle": "Add an app launch splash screen that is shown before the authentication/onboarding flow, and then automatically routes the user to the correct next screen (registration if first-time, otherwise login/dashboard).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/LoginPage.tsx",
+        "frontend/src/pages/SplashPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "camera@1.0.0",
+        "qr-code@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-the-current-first-time-profile-setup-dialog-with-a-first-run-registration-screen-that-collects-1-the-user-s-name-and-2-a-role-selection-student-or-teacher-and-persists-both-to-the-user-account",
+      "featureTitle": "Replace the current first-time profile setup dialog with a first-run Registration screen that collects (1) the user’s name and (2) a role selection (Student or Teacher), and persists both to the user account.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/hooks/useCurrentUser.ts",
+        "frontend/src/pages/RegistrationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "camera@1.0.0",
+        "qr-code@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-role-based-navigation-and-dashboards-so-that-after-login-users-are-routed-to-the-correct-dashboard-experience-based-on-the-saved-role-teacher-vs-student",
+      "featureTitle": "Implement role-based navigation and dashboards so that after login, users are routed to the correct dashboard experience based on the saved role (Teacher vs Student).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/AdminRoute.tsx",
+        "frontend/src/components/layout/BottomNav.tsx",
+        "frontend/src/pages/AccessDeniedPage.tsx",
+        "frontend/src/pages/DashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "camera@1.0.0",
+        "qr-code@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-role-naming-throughout-the-ui-from-admin-user-wording-to-teacher-student-wording-while-keeping-all-user-facing-text-in-english-and-ensuring-the-app-remains-consistent-across-login-registration-dashboard-and-navigation",
+      "featureTitle": "Update role naming throughout the UI from Admin/User wording to Teacher/Student wording while keeping all user-facing text in English and ensuring the app remains consistent across login, registration, dashboard, and navigation.",
+      "files": [
+        "frontend/src/components/layout/BottomNav.tsx",
+        "frontend/src/pages/AccessDeniedPage.tsx",
+        "frontend/src/pages/DashboardPage.tsx",
+        "frontend/src/pages/RegistrationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "camera@1.0.0",
+        "qr-code@1.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build a QR-based attendance system for students/teachers with first-run registration, role selection, role-based dashboards, and a modern UI, delivered as an installable Android app with a downloadable APK.",
+  "architectural_notes": [
+    "Target deliverable changed/clarified to an Android app with a downloadable APK (not just a PWA).",
+    "Add first-run detection to show registration before login for new users.",
+    "Persist user role (Student/Teacher) in user profile and route to role-specific dashboards after authentication."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-add-login-authentication-for-the-app-including-at-least-two-roles-admin-creates-sessions-and-views-all-attendance-and-member-user-scans-qr-and-views-own-check-ins",
+      "title": "Add login/authentication for the app, including at least two roles: Admin (creates sessions and views all attendance) and Member/User (scans QR and views own check-ins).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-mobile-first-frontend-ui-for-the-attendance-system-with-a-modern-professional-visual-theme-that-is-consistent-across-all-screens-colors-typography-spacing-components-do-not-use-a-blue-purple-primary-palette",
+      "title": "Create the mobile-first frontend UI for the attendance system with a modern, professional visual theme that is consistent across all screens (colors, typography, spacing, components). Do not use a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-qr-scanning-in-the-frontend-using-the-device-camera-browser-getusermedia-and-on-successful-scan-submit-a-check-in-to-the-backend-and-show-a-clear-success-failure-result-state",
+      "title": "Implement QR scanning in the frontend using the device camera (browser getUserMedia), and on successful scan, submit a check-in to the backend and show a clear success/failure result state.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-deliver-the-app-as-an-android-installable-experience-by-implementing-a-progressive-web-app-pwa-web-app-manifest-service-worker-for-basic-offline-shell-caching-and-install-prompts-ux-guidance-for-android-chrome",
+      "title": "Deliver the app as an Android-installable experience by implementing a Progressive Web App (PWA): web app manifest, service worker for basic offline shell caching, and install prompts/UX guidance for Android Chrome.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clear-delivery-note-in-the-project-e-g-a-docs-page-within-the-app-or-a-markdown-file-explaining-that-this-platform-outputs-a-web-pwa-build-and-providing-step-by-step-instructions-to-produce-a-downloadable-android-apk-externally-by-wrapping-the-pwa-e-g-android-trusted-web-activity",
+      "title": "Add a clear delivery note in the project (e.g., a docs page within the app or a markdown file) explaining that this platform outputs a web/PWA build and providing step-by-step instructions to produce a downloadable Android APK externally by wrapping the PWA (e.g., Android Trusted Web Activity).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-app-launch-splash-screen-that-is-shown-before-the-authentication-onboarding-flow-and-then-automatically-routes-the-user-to-the-correct-next-screen-registration-if-first-time-otherwise-login-dashboard",
+      "title": "Add an app launch splash screen that is shown before the authentication/onboarding flow, and then automatically routes the user to the correct next screen (registration if first-time, otherwise login/dashboard).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-first-time-profile-setup-dialog-with-a-first-run-registration-screen-that-collects-1-the-user-s-name-and-2-a-role-selection-student-or-teacher-and-persists-both-to-the-user-account",
+      "title": "Replace the current first-time profile setup dialog with a first-run Registration screen that collects (1) the user’s name and (2) a role selection (Student or Teacher), and persists both to the user account.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-role-based-navigation-and-dashboards-so-that-after-login-users-are-routed-to-the-correct-dashboard-experience-based-on-the-saved-role-teacher-vs-student",
+      "title": "Implement role-based navigation and dashboards so that after login, users are routed to the correct dashboard experience based on the saved role (Teacher vs Student).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-role-naming-throughout-the-ui-from-admin-user-wording-to-teacher-student-wording-while-keeping-all-user-facing-text-in-english-and-ensuring-the-app-remains-consistent-across-login-registration-dashboard-and-navigation",
+      "title": "Update role naming throughout the UI from Admin/User wording to Teacher/Student wording while keeping all user-facing text in English and ensuring the app remains consistent across login, registration, dashboard, and navigation.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "QR-based attendance system (scan/check-in)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "User authentication/login",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Modern, professional mobile UI for Android",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Provide a downloadable Android APK build for the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Implement backend data models and APIs for a QR-based attendance system: users, sessions/events (each with a generated QR payload), and attendance records (who checked in, when, and for which session).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "First-run onboarding flow: splash screen then registration screen on first app launch",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Registration + role selection (Student/Teacher) persisted to user account and used on subsequent logins",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Role-based dashboards: after login, open the appropriate dashboard based on saved role (Teacher vs Student)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "QR Attend",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
