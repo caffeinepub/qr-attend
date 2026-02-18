@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 7,
   "summary": "Build a QR-based attendance system for students/teachers with first-run registration, role selection, role-based dashboards, and a modern UI, delivered as an installable Android app with a downloadable APK.",
   "architectural_notes": [
     "Target deliverable changed/clarified to an Android app with a downloadable APK (not just a PWA).",
@@ -79,6 +79,22 @@
       "title": "Update role naming throughout the UI from Admin/User wording to Teacher/Student wording while keeping all user-facing text in English and ensuring the app remains consistent across login, registration, dashboard, and navigation.",
       "reqIds": [
         "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visible-navigation-entry-to-the-existing-delivery-notes-screen-so-users-can-easily-find-installation-and-apk-wrapping-instructions-from-within-the-app",
+      "title": "Add a visible navigation entry to the existing Delivery Notes screen so users can easily find installation and APK-wrapping instructions from within the app.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-delivery-notes-ui-content-to-more-directly-answer-requests-for-a-downloadable-android-apk-by-clearly-stating-that-the-platform-outputs-a-web-pwa-build-and-providing-copy-pasteable-steps-for-producing-an-apk-externally-via-twa-bubblewrap-and-pwa-builder",
+      "title": "Update the Delivery Notes UI content to more directly answer requests for a downloadable Android APK by clearly stating that the platform outputs a web/PWA build and providing copy-pasteable steps for producing an APK externally via TWA (Bubblewrap) and PWA Builder.",
+      "reqIds": [
+        "REQ-12"
       ],
       "version": 1
     }

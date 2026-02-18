@@ -1,5 +1,5 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router';
-import { Home, QrCode, History, Settings, BarChart3 } from 'lucide-react';
+import { Home, QrCode, History, Settings, BarChart3, Package } from 'lucide-react';
 import { useIsCallerAdmin } from '../../hooks/useCurrentUser';
 
 export default function BottomNav() {
@@ -12,6 +12,7 @@ export default function BottomNav() {
     { path: '/', icon: Home, label: 'Dashboard' },
     { path: '/scan', icon: QrCode, label: 'Scan' },
     { path: '/history', icon: History, label: 'History' },
+    { path: '/delivery', icon: Package, label: 'Delivery' },
     ...(isTeacher
       ? [
           { path: '/admin/sessions', icon: Settings, label: 'Sessions' },
